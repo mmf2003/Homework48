@@ -17,6 +17,11 @@ function App() {
             title: "Finish Homework",
             description: "Complete the React UI library homework.",
         },
+        {
+            id: 3,
+            title: "Deploy Project",
+            description: "Deploy the finished application to Vercel.",
+        },
     ]);
 
     const handleAddTask = (task) => {
@@ -28,21 +33,71 @@ function App() {
     };
 
     return (
-        <>
-            <Header />
+        <Box
+            sx={{
+                minHeight: "100vh",
+                backgroundColor: "#f7f8fa",
+            }}
+        >
+            <Header taskCount={tasks.length} />
 
             <Container maxWidth="lg">
-                <Box sx={{ py: 5 }}>
+                <Box sx={{ py: { xs: 4, md: 6 } }}>
+                    <Box
+                        sx={{
+                            textAlign: "center",
+                            mb: 4,
+                        }}
+                    >
+                        <Typography
+                            variant="h4"
+                            component="h2"
+                            fontWeight={700}
+                            gutterBottom
+                        >
+                            My Task Manager
+                        </Typography>
+
+                        <Typography color="text.secondary">
+                            Create and manage your daily tasks
+                        </Typography>
+                    </Box>
+
                     <TaskForm onAddTask={handleAddTask} />
 
-                    <Typography variant="h5" sx={{ mb: 3 }}>
-                        My Tasks
-                    </Typography>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            mt: 6,
+                            mb: 3,
+                        }}
+                    >
+                        <Typography variant="h5" fontWeight={700}>
+                            My Tasks
+                        </Typography>
+
+                        <Typography color="text.secondary">
+                            {tasks.length} total
+                        </Typography>
+                    </Box>
 
                     {tasks.length === 0 ? (
-                        <Typography color="text.secondary">
-                            No tasks yet.
-                        </Typography>
+                        <Box
+                            sx={{
+                                textAlign: "center",
+                                py: 8,
+                            }}
+                        >
+                            <Typography variant="h6" color="text.secondary">
+                                No tasks yet
+                            </Typography>
+
+                            <Typography variant="body2" color="text.secondary">
+                                Add your first task using the form above.
+                            </Typography>
+                        </Box>
                     ) : (
                         <Grid container spacing={3}>
                             {tasks.map((task) => (
@@ -64,7 +119,7 @@ function App() {
                     )}
                 </Box>
             </Container>
-        </>
+        </Box>
     );
 }
 
